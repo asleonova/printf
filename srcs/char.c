@@ -3,14 +3,7 @@
 /**
  ** print_char - prints a character, returns the amount of characters printed
  * */
-/*int		print_char(va_list arg, t_flags flags)
-{
-	char c;
 
-	c = va_arg(arg, int);
-	return (view_char(c, flags));
-}
-*/
 int view_char(va_list arg, t_flags flags)
 {
     int count;
@@ -30,26 +23,3 @@ int view_char(va_list arg, t_flags flags)
     }
     return (count + 1);  // +1 - это для самого чара
 }
-
-/*int	view_char(char c, t_flags flags)
-{
-	int	count;
-
-	count = 0;
-	if (flags.flag_minus == 1)
-		ft_putchar(c);
-	count = ft_width(flags.width, 1, 0);
-	if (flags.flag_minus == 0)
-		ft_putchar(c);
-	return (count + 1);
-}
-*/
-/*int		print_char(va_list arg)
-{
-	char c;
-
-	c = va_arg(arg, int);
-	ft_putchar(c);
-	return(1);
-}
-*/

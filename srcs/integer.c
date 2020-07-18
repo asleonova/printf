@@ -119,6 +119,7 @@ int		print_int(va_list arg, t_flags flags)
 	int count;
 	int tmp;
 
+	count = 0;
 	nb = va_arg(arg, int);
 	tmp = nb;
 	if (nb < 0 && (flags.flag_zero == 1 || flags.precision >= 0)) // если точность задана или стоит флаг "минус" и если отриц число
@@ -131,9 +132,10 @@ int		print_int(va_list arg, t_flags flags)
 		count++;
 	}
 	str_nb = ft_itoa(nb);
+	printf("%s\n\n", str_nb);
 	count += int_check_flags(str_nb, tmp, flags);
 	free (str_nb);
-	return (count);
+	return (count); 
 }
 
 /** print_uint - prints unsigned integer, returns the amoubt of characters printed
