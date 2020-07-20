@@ -6,7 +6,7 @@
 #    By: dbliss <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/11 13:39:27 by dbliss            #+#    #+#              #
-#    Updated: 2020/07/18 18:17:32 by dbliss           ###   ########.fr        #
+#    Updated: 2020/07/20 17:55:05 by dbliss           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS =	flags.c \
 		string.c \
 		width.c \
 		char.c \
+		u_integer.c \
 
 OBJS = $(SRCS:%.c=%.o)
 

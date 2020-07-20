@@ -90,7 +90,7 @@ int		print_uint(unsigned int nb, t_flags flags)
 {
 	char *str_nb;
 	int count;
-	int tmp;
+	unsigned int tmp;
 
 	count = 0;
 	tmp = nb;
