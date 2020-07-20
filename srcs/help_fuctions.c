@@ -48,13 +48,13 @@ int	parser(int c, va_list arg, t_flags flags)
 
 	count = 0;
 	if (c == 'c')
-		count += view_char(arg, flags);
+		count += print_char(arg, flags);
 	if (c == 's')
-		count = print_str(arg, flags);
+		count = print_str(va_arg(arg, char *), flags);
 	if (c == 'd' || c == 'i')
-		count = print_int(arg, flags);
+		count = print_int(va_arg(arg, int), flags);
 	if (c == 'u')
-		count = print_uint(arg);
+		count = print_uint(va_arg(arg, unsigned int), flags);
 	if (c == 'x')
 		count = print_hex(arg);
 	if (c == 'X')

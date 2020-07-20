@@ -1,8 +1,8 @@
-
 #include "ft_printf.h"
-#include <stdio.h>
+/** print_uint - prints unsigned integer, returns the amoubt of characters printed
+ */
 
-int num_len(int nb)
+int unum_len(unsigned int nb)
 {
 	int len;
 	len = 0;
@@ -19,36 +19,14 @@ int num_len(int nb)
 	return (len);
 }
 
-int	ft_strlen(char *str)
+char *ft_itoa_uint(unsigned int nb)
 {
-	int	len;
-
-	len = 0;
-	while (*str++)
-		len++;
-	return (len);
-}
-
-int	ft_putstr(char *str, int len)
-{
-	int	count;
-
-	count = 0;
-	while (str[count] && count < len)
-		ft_putchar(str[count++]);
-	return (count);
-}
-
-char *ft_itoa(int nb)
-{
-	int i;
-	int len;
 	char *str;
+    int len;
+    int i;
 
 	i = 0;
-	if (nb == -2147483648)
-		return (ft_strdup("-2147483648"));
-	len =  num_len(nb);
+	len =  unum_len(nb);
 	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	str[len] = 0;
@@ -68,7 +46,7 @@ char *ft_itoa(int nb)
 	 return (str);
 }
 
-int print_int_result(char *str_nb, int nb, t_flags flags)
+int print_uint_result(char *str_nb, unsigned int nb, t_flags flags)
 {
 	int count;
 	int len;
@@ -85,7 +63,7 @@ int print_int_result(char *str_nb, int nb, t_flags flags)
 	return (count);
 
 }
-int		int_check_flags(char *str_nb, int nb, t_flags flags)
+int		uint_check_flags(char *str_nb, unsigned int nb, t_flags flags)
 {
 	int count;
 	int len;
@@ -95,7 +73,7 @@ int		int_check_flags(char *str_nb, int nb, t_flags flags)
 	if (flags.precision >= 0 && flags.precision < ft_strlen(str_nb))
 		flags.precision = len;
 	if (flags.flag_minus == 1)
-		count += print_int_result(str_nb, nb, flags);
+		count += print_uint_result(str_nb, nb, flags);
 	if (flags.precision >= 0)
 	{
 		flags.width = flags.width - flags.precision; // это чтоб узнать кол-во отступов
@@ -104,11 +82,11 @@ int		int_check_flags(char *str_nb, int nb, t_flags flags)
 	if (flags.precision < 0)
 		count += ft_width(flags.width, len, flags.flag_zero);
 	if (flags.flag_minus == 0)
-		count += print_int_result(str_nb, nb, flags);
+		count += print_uint_result(str_nb, nb, flags);
 	return(count);
 }
 
-int		print_int(int nb, t_flags flags)
+int		print_uint(unsigned int nb, t_flags flags)
 {
 	char *str_nb;
 	int count;
@@ -130,8 +108,31 @@ int		print_int(int nb, t_flags flags)
 		flags.width--; // иначе печатает на один 0 больше из-за минуса
 		count++;
 	}
-	str_nb = ft_itoa(nb);
-	count += int_check_flags(str_nb, tmp, flags);
+	str_nb = ft_itoa_uint(nb);
+	count += uint_check_flags(str_nb, tmp, flags);
 	free (str_nb);
 	return (count); 
 }
+
+/*void	put_uint(unsigned int nb)
+{
+	if (nb > 9)
+	{
+		put_uint(nb / 10);
+		put_uint(nb % 10);
+	}
+	else
+		ft_putchar(nb + '0');
+}
+*/
+/*int		print_uint(va_list arg)
+{
+	unsigned int nb;
+
+	nb = va_arg(arg, unsigned int);
+	if (nb < 1) // это если юзер подаст отрицательное число после знака процента
+ 	   return (-1);
+	put_uint(nb);
+	return(num_len(nb));
+}
+*/

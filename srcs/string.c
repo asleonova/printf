@@ -3,14 +3,12 @@
  ** print_string - prints a string, returns the amount of characters printed
  */
 
-int		print_str(va_list arg, t_flags flags)
+int		print_str(char *str, t_flags flags)
 {
 	int count;
-	char *str;
 	int len;
 
 	count = 0;
-	str = va_arg(arg, char *);
 	if (!str)
 		str = "(null)";
 	len = ft_strlen(str);

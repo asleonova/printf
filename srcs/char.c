@@ -4,7 +4,7 @@
  ** print_char - prints a character, returns the amount of characters printed
  * */
 
-int view_char(va_list arg, t_flags flags)
+int print_char(va_list arg, t_flags flags)
 {
     int count;
     char c;

@@ -38,6 +38,14 @@ int flags_precision(const char *s, int i, va_list arg, t_flags *flags)
     return (i);
 }
 
+t_flags	flags_width(t_flags flags, va_list arg)
+{
+	flags.star = 1;
+	flags.width = va_arg(arg, int);
+	return (flags);
+    
+}
+
 int check_flags(const char *s, int i, t_flags *flags, va_list arg)
 {
     while (s[i])
@@ -47,11 +55,16 @@ int check_flags(const char *s, int i, t_flags *flags, va_list arg)
         if (s[i] == '0' && flags->width == 0)
             flags->flag_zero = 1;
         if (s[i] == '-')
-            flags->flag_minus = 1;
-        if (is_digit(s[i]))
-            *flags = flags_digit(s[i], *flags);
+            {
+                flags->flag_minus = 1;
+                flags->flag_zero = 0; //  flag '0' is ignored when flag '-' is present - это настоящий принтф ворнинг сообщает
+            }
+        if (s[i] == '*')
+			*flags = flags_width(*flags, arg);
         if (s[i] == '.')
             i = flags_precision(s, i, arg, flags);
+        if (is_digit(s[i]))
+            *flags = flags_digit(s[i], *flags);
         if (is_specifier(s[i]))
         {
             flags->type = s[i]; // записать в структуру значение спецификатора
