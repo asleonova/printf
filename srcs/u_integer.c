@@ -55,8 +55,6 @@ int print_uint_result(char *str_nb, unsigned int nb, t_flags flags)
 	len = ft_strlen(str_nb);
 	if (flags.precision >= 0 && flags.precision < ft_strlen(str_nb))
 		flags.precision = len;
-	if (nb < 0 && flags.precision >= 0)
-			ft_putchar('-');
 	if (flags.precision >= 0)
 		count += ft_width(flags.precision - 1, len - 1, 1); // это потому что при точности надо нулями заполнить
 	count += ft_putstr(str_nb, len);	
@@ -99,14 +97,6 @@ int		print_uint(unsigned int nb, t_flags flags)
 	{
 		count += ft_width(flags.width, 0, 0);
 		return (count);
-	}
-	if (nb < 0 && (flags.flag_zero == 1 || flags.precision >= 0)) // если точность задана или стоит флаг "минус" и если отриц число
-	{
-		if (flags.flag_zero == 1 && flags.precision == -1)
-			ft_putchar('-');
-		nb *= -1;
-		flags.width--; // иначе печатает на один 0 больше из-за минуса
-		count++;
 	}
 	str_nb = ft_itoa_uint(nb);
 	count += uint_check_flags(str_nb, tmp, flags);
