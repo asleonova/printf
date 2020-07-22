@@ -56,13 +56,13 @@ int	parser(int c, va_list arg, t_flags flags)
 	if (c == 'u')
 		count = print_uint(va_arg(arg, unsigned int), flags);
 	if (c == 'x')
-		count = print_hex(arg);
+		count = print_hex(va_arg(arg, unsigned int), flags);
 	if (c == 'X')
-		count = print_hex(arg);
+		count = print_upper_hex(va_arg(arg, unsigned int), flags);
 	if (c == '%')
-		count = print_percent();
+		count = print_percent(flags);
 	if (c == 'p')
-		count = print_ptr(arg);
+		count = print_ptr(va_arg(arg, unsigned long long), flags);
 	return(count);
 
 }

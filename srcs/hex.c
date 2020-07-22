@@ -72,115 +72,151 @@ char		*ft_strcpy(char *dst, char *src)
  * Return: A pointer to a character
  */
 
-char	*ft_strrev(char *str) 
+char	*ft_strrev(char *str)
 {
-	char	tmp;
-    char    *dst;
 	int		i;
-	int		j;
-    
+	int		length;
+	char	buff;
 
 	i = 0;
-	j = 0;
-	while (str[j]) 
-		j++; 
-	j--; 
-    //if(!(dst = malloc(sizeof(char) * j + 1)))
-        //return (NULL);
-    //ft_strcpy(dst, str);
-    dst = ft_strdup(str);
-	while (j >= i)  
+	length = ft_strlen(str);
+	while (length - 1 > i)
 	{
-		tmp = dst[i]; 
-		dst[i] = dst[j]; 
-		dst[j] = tmp; 
-		i++; 
-		j--; 
+		buff = str[i];
+		str[i] = str[length - 1];
+		str[length - 1] = buff;
+		length--;
+		i++;
 	}
-	return (dst);
+	return (str);
 }
 
-
-int print_hex(va_list arg)
+char *put_hex(unsigned int nb)
 {
     int len;
-	unsigned int num;
 	int rem_num;
 	char *hex_tmp;
 	char *rev_hex;
 
-	num = va_arg(arg, unsigned int);
-
-	if (num == 0)
-		return (ft_putchar('0'));
-	len = num_len_base(num, 16);
-	if (!(hex_tmp = malloc(sizeof(char) * len + 1)))
-		return (-1);
+	if (nb == 0)
+		return (ft_strdup("0"));
+	if (!(hex_tmp = malloc(sizeof(char) * num_len_base(nb, 16) + 1)))
+		return (NULL);
 	len = 0; 
-    while (num > 0) //123
+    while (nb > 0) //123
 	{
-		rem_num = num % 16;  // 11 ; 7 
+		rem_num = nb % 16;  // 11 ; 7 
 		if (rem_num > 9)
-		{
-			rem_num = hex_check(rem_num, 'x');
-			hex_tmp[len] = rem_num; // [0] - b
-		}
+			hex_tmp[len] = rem_num + 87; // [0] - b
 		else
 			hex_tmp[len] = rem_num + '0'; // [1] - 7 convert int to char
-		num = num / 16; // 7 ; 0.4
+		nb = nb / 16; // 7 ; 0.4
         len++;
 	}
 	hex_tmp[len] = '\0';
 	rev_hex = ft_strrev(hex_tmp);
-	put_str_base(rev_hex);
-	free(hex_tmp);
-	free(rev_hex);
-	return (len);
+	// free(hex_tmp);
+	return (rev_hex);
 }
 
-/**
- * print_heX - Prints a representation of a decimal number on base16 Uppercase
- * @list: List of the arguments passed to the function
- * Return: Number of characters printed
- */
-
-int print_heX(va_list arg)
+char *put_upper_hex(unsigned int nb)
 {
     int len;
-	unsigned int num;
 	int rem_num;
 	char *hex_tmp;
 	char *rev_hex;
 
-	num = va_arg(arg, unsigned int);
-
-	if (num == 0)
-		return (ft_putchar('0'));
-	if (num < 1) // вот это условие мне кажется можно убрать
-		return (-1);
-	len = num_len_base(num, 16);
-	if (!(hex_tmp = malloc(sizeof(char) * len + 1)))
-		return (-1);
+	if (nb == 0)
+		return (ft_strdup("0"));
+	if (!(hex_tmp = malloc(sizeof(char) * num_len_base(nb, 16) + 1)))
+		return (NULL);
 	len = 0; 
-    while (num > 0)
+    while (nb > 0) //123
 	{
-		rem_num = num % 16;
+		rem_num = nb % 16;  // 11 ; 7 
 		if (rem_num > 9)
-		{
-			rem_num = hex_check(rem_num, 'X');
-			hex_tmp[len] = rem_num;
-		}
+			hex_tmp[len] = rem_num + 55; // [0] - b
 		else
-			hex_tmp[len] = rem_num + '0'; 
-		num = num / 16; 
+			hex_tmp[len] = rem_num + '0'; // [1] - 7 convert int to char
+		nb = nb / 16; // 7 ; 0.4
         len++;
 	}
 	hex_tmp[len] = '\0';
 	rev_hex = ft_strrev(hex_tmp);
-	if (rev_hex == NULL) // это тоже скорее всего нужно убрать просто
-		return (-1);
-	put_str_base(rev_hex);
-	free(hex_tmp);
-	free(rev_hex);
-	return (len);
+	// free(hex_tmp);
+	return (rev_hex);
+}
+
+int print_hex_result(char *hex,t_flags flags)
+{
+	int count;
+	int len;
+
+	count = 0;
+	len = ft_strlen(hex);
+	if (flags.precision >= 0 && flags.precision < ft_strlen(hex))
+		flags.precision = len;
+	if (flags.precision >= 0)
+		count += ft_width(flags.precision - 1, len - 1, 1); // это потому что при точности надо нулями заполнить
+	count += ft_putstr(hex, len);	
+	return (count);
+
+}
+int		hex_check_flags(char *hex, t_flags flags)
+{
+	int count;
+	int len;
+	count = 0;
+
+	len = ft_strlen(hex);
+	if (flags.precision >= 0 && flags.precision < ft_strlen(hex))
+		flags.precision = len;
+	if (flags.flag_minus == 1)
+		count += print_hex_result(hex, flags);
+	if (flags.precision >= 0)
+	{
+		flags.width = flags.width - flags.precision; // это чтоб узнать кол-во отступов
+		count += ft_width(flags.width, 0, 0);
+	}
+	if (flags.precision < 0)
+		count += ft_width(flags.width, len, flags.flag_zero);
+	if (flags.flag_minus == 0)
+		count += print_hex_result(hex, flags);
+	return(count);
+}
+
+int		print_hex(unsigned int nb, t_flags flags)
+{
+	char *hex;
+	int count;
+
+	count = 0;
+
+	if (flags.precision == 0 && nb == 0)
+	{
+		count += ft_width(flags.width, 0, 0);
+		return (count);
+	}
+	hex = put_hex(nb);
+	count += hex_check_flags(hex, flags);
+	free (hex);
+	return (count); 
+}
+
+int		print_upper_hex(unsigned int nb, t_flags flags)
+{
+	char *hex;
+	int count;
+
+	count = 0;
+
+	if (flags.precision == 0 && nb == 0)
+	{
+		count += ft_width(flags.width, 0, 0);
+		return (count);
+	}
+	hex = put_upper_hex(nb);
+	count += hex_check_flags(hex, flags);
+	free (hex);
+	return (count); 
 }

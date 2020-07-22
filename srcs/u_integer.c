@@ -46,7 +46,7 @@ char *ft_itoa_uint(unsigned int nb)
 	 return (str);
 }
 
-int print_uint_result(char *str_nb, unsigned int nb, t_flags flags)
+int print_uint_result(char *str_nb, t_flags flags)
 {
 	int count;
 	int len;
@@ -61,7 +61,7 @@ int print_uint_result(char *str_nb, unsigned int nb, t_flags flags)
 	return (count);
 
 }
-int		uint_check_flags(char *str_nb, unsigned int nb, t_flags flags)
+int		uint_check_flags(char *str_nb, t_flags flags)
 {
 	int count;
 	int len;
@@ -71,7 +71,7 @@ int		uint_check_flags(char *str_nb, unsigned int nb, t_flags flags)
 	if (flags.precision >= 0 && flags.precision < ft_strlen(str_nb))
 		flags.precision = len;
 	if (flags.flag_minus == 1)
-		count += print_uint_result(str_nb, nb, flags);
+		count += print_uint_result(str_nb, flags);
 	if (flags.precision >= 0)
 	{
 		flags.width = flags.width - flags.precision; // это чтоб узнать кол-во отступов
@@ -80,7 +80,7 @@ int		uint_check_flags(char *str_nb, unsigned int nb, t_flags flags)
 	if (flags.precision < 0)
 		count += ft_width(flags.width, len, flags.flag_zero);
 	if (flags.flag_minus == 0)
-		count += print_uint_result(str_nb, nb, flags);
+		count += print_uint_result(str_nb, flags);
 	return(count);
 }
 
@@ -99,7 +99,7 @@ int		print_uint(unsigned int nb, t_flags flags)
 		return (count);
 	}
 	str_nb = ft_itoa_uint(nb);
-	count += uint_check_flags(str_nb, tmp, flags);
+	count += uint_check_flags(str_nb, flags);
 	free (str_nb);
 	return (count); 
 }

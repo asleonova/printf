@@ -40,10 +40,13 @@ int print_char(va_list arg, t_flags flags);
 
 unsigned int num_len_base(unsigned int num, int base);
 int hex_check(int num, char x);
-char		*ft_strcpy(char *dst, char *src);
 char	*ft_strrev(char *str) ;
-int print_hex(va_list arg);
-int print_heX(va_list arg);
+int print_hex(unsigned int nb, t_flags flags);
+char *put_hex(unsigned int nb);
+char *put_upper_hex(unsigned int nb);
+int print_hex_result(char *hex, t_flags flags);
+int		hex_check_flags(char *hex, t_flags flags); 
+int		print_upper_hex(unsigned int nb, t_flags flags);
 
 void	put_int(int nb);
 int		print_int(int nb, t_flags flags);
@@ -52,11 +55,15 @@ int     print_int_result(char *str_nb, int nb, t_flags flags);
 void	put_uint(unsigned int nb);
 int unum_len(unsigned int nb);
 int		print_uint(unsigned int nb, t_flags flags);
-int		uint_check_flags(char *str_nb, unsigned int nb, t_flags flags);
-int     print_uint_result(char *str_nb, unsigned int nb, t_flags flags);
+int		uint_check_flags(char *str_nb, t_flags flags);
+int     print_uint_result(char *str_nb, t_flags flags);
 char     *ft_itoa_uint(unsigned int nb);
-int		print_percent();
-int		print_ptr();
+int		print_percent(t_flags flags);
+int print_ptr_result(char *ptr, t_flags flags);
+int		ptr_check_flags(char *ptr, t_flags flags);
+int		print_ptr(unsigned long long nb, t_flags flags);
+
+
 int		print_str(char *str, t_flags flags);
 
 

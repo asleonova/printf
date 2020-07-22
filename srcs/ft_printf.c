@@ -47,54 +47,49 @@ int				ft_printf(const char *s, ...)
 	free((char *)line);
 	return (count);
 }
-
+/*
 #include <stdio.h>
 #include <limits.h>
 
 int main()
 {
-	printf("01) standart PRINTF : |%u|\n", 34);
-	ft_printf("01) my       PRINTF : |%u|\n", 34);
-	printf("02) standart PRINTF : |%u|\n", -34);
-	ft_printf("02) my       PRINTF : |%u|\n", -34);
-	printf("03) standart PRINTF : |%-u|\n", 50);
-	ft_printf("03) my       PRINTF : |%-u|\n", 50);
-	printf("04) standart PRINTF : |%10u|\n", 90);
-	ft_printf("04) my       PRINTF : |%10u|\n", 90);
-	printf("05) standart PRINTF : |%.10u|\n", 90);
-	ft_printf("05) my       PRINTF : |%.10u|\n", 90);
-	printf("06) standart PRINTF : |%15u|\n", -100);
-	ft_printf("06) my       PRINTF : |%15u|\n", -100);
-	printf("07) standart PRINTF : |%.15u|\n", -100);
-	ft_printf("07) my       PRINTF : |%.15u|\n", -100);
-	printf("08) standart PRINTF : |%10.5u|\n", 52);
-	ft_printf("08) my       PRINTF : |%10.5u|\n", 52);
-	printf("09) standart PRINTF : |%5.10u|\n", 52);
-	ft_printf("09) my       PRINTF : |%5.10u|\n", 52);
-	printf("10) standart PRINTF : |%20.15u|\n", -100000);
-	ft_printf("10) my       PRINTF : |%20.15u|\n", -100000);
-	printf("11) standart PRINTF : |%15.20u|\n", -100000);
-	ft_printf("11) my       PRINTF : |%15.20u|\n", -100000);
-	printf("12) standart PRINTF : |%-10u|\n", 144);
-	ft_printf("12) my       PRINTF : |%-10u|\n", 144);
-	printf("13) standart PRINTF : |%-.10u|\n", 144);
-	ft_printf("13) my       PRINTF : |%-.10u|\n", 144);
-	printf("14) standart PRINTF : |%-20u|\n", -20000000);
-	ft_printf("14) my       PRINTF : |%-20u|\n", -20000000);
-	printf("15) standart PRINTF : |%08u|\n", 64);
-	ft_printf("15) my       PRINTF : |%08u|\n", 64);
-	printf("16) standart PRINTF : |%03.4u|\n", 10);
-	ft_printf("16) my       PRINTF : |%03.4u|\n", 10);
-	printf("17) standart PRINTF : |%u|\n", 0);
-	ft_printf("17) my       PRINTF : |%u|\n", 0);
-	printf("18) standart PRINTF : |%.u|\n", 0);
-	ft_printf("18) my       PRINTF : |%.u|\n", 0);
-	printf("19) standart PRINTF : |%10u|\n", 0);
-	ft_printf("19) my       PRINTF : |%10u|\n", 0);
-	printf("20) standart PRINTF : |%.u|\n", 88);
-	ft_printf("20) my       PRINTF : |%.u|\n", 88);
-	printf("21) standart PRINTF : |%u|\n", UINT_MAX);
-	ft_printf("21) my       PRINTF : |%u|\n", UINT_MAX);
-	printf("22) standart PRINTF : |%u| |%u|\n", (unsigned int)-1, UINT_MAX + 3);
-	ft_printf("22) my       PRINTF : |%u| |%u|\n", (unsigned int)-1, UINT_MAX + 3);
+	int	*tab = malloc(sizeof(int) * 10);
+	int	*tab2 = malloc(0);
+	
+	ft_printf("--------------------%%p--------------------\n");
+	printf("01) standart PRINTF : |%p|\n", "salut");
+	ft_printf("01) my       PRINTF : |%p|\n", "salut");
+	printf("02) standart PRINTF : |%-p|\n", tab2);
+	ft_printf("02) my       PRINTF : |%-p|\n", tab2);
+	printf("03) standart PRINTF : |%---------p|\n", "test2");
+	ft_printf("03) my       PRINTF : |%----------p|\n", "test2");
+	printf("04) standart PRINTF : |%10p|\n", "42");
+	ft_printf("04) my       PRINTF : |%10p|\n", "42");
+	printf("05) standart PRINTF : |%-10p|\n", "42");
+	ft_printf("05) my       PRINTF : |%-10p|\n", "42");
+	printf("06) standart PRINTF : |%2p|\n", tab);
+	ft_printf("06) my       PRINTF : |%2p|\n", tab);
+	printf("07) standart PRINTF : |%-2p|\n", tab);
+	ft_printf("07) my       PRINTF : |%-2p|\n", tab);
+	printf("08) standart PRINTF : |%p|\n", "\0\0\0\0\0");
+	ft_printf("08) my       PRINTF : |%p|\n", "\0\0\0\0\0");
+	printf("09) standart PRINTF : |%20p|\n", "\0\0\0\0\0");
+	ft_printf("09) my       PRINTF : |%20p|\n", "\0\0\0\0\0");
+	printf("10) standart PRINTF : |%p|\n", "");
+	ft_printf("10) my       PRINTF : |%p|\n", "");
+	printf("11) standart PRINTF : |%p|\n", NULL);
+	ft_printf("11) my       PRINTF : |%p|\n", NULL);
+	printf("12) standart PRINTF : |%10p|\n", NULL);
+	ft_printf("12) my       PRINTF : |%10p|\n", NULL);
+	printf("13) standart PRINTF : |%-10p|\n", NULL);
+	ft_printf("13) my       PRINTF : |%-10p|\n", NULL);
+	printf("14) standart PRINTF : |%.1p|\n", NULL);
+	ft_printf("14) my       PRINTF : |%.1p|\n", NULL);
+	printf("15) standart PRINTF : |%10.2p|\n", NULL);
+	ft_printf("15) my       PRINTF : |%10.2p|\n", NULL);
+	printf("16) standart PRINTF : |%2.5p|\n", NULL);
+	ft_printf("16) my       PRINTF : |%2.5p|\n", NULL);
+	printf("17) standart PRINTF : |%-10.2p|\n", NULL);
+	ft_printf("17) my       PRINTF : |%-10.2p|\n", NULL);
 }
+*/
