@@ -42,6 +42,12 @@ t_flags	flags_width(t_flags flags, va_list arg)
 {
 	flags.star = 1;
 	flags.width = va_arg(arg, int);
+    if (flags.width < 0) // для отрицательного значения ширины
+	{
+        flags.flag_zero = 0;
+		flags.flag_minus = 1;
+		flags.width *= -1;
+	}
 	return (flags);
     
 }
@@ -52,13 +58,14 @@ int check_flags(const char *s, int i, t_flags *flags, va_list arg)
     {
         if (!is_digit(s[i]) && !is_specifier(s[i]) && !is_flag(s[i]))
 			break ;
-        if (s[i] == '0' && flags->width == 0)
+        if (s[i] == '0' && flags->width == 0 && flags->flag_minus == 0)
             flags->flag_zero = 1;
         if (s[i] == '-')
             {
                 flags->flag_minus = 1;
                 flags->flag_zero = 0; //  flag '0' is ignored when flag '-' is present - это настоящий принтф ворнинг сообщает
             }
+
         if (s[i] == '*')
 			*flags = flags_width(*flags, arg);
         if (s[i] == '.')

@@ -13,16 +13,16 @@ int				pre_printf(const char *line, va_list arg)
 	while (line[i])
 	{
 		flags = init_flags();
+		if (line[i] == '%' && line[i + 1] == '\0')
+			return (-1);
 		if (line[i] == '%' && line[i + 1])
 		{
 			i++;
 			i = check_flags(line, i, &flags, arg);
 			if (is_specifier(line[i]))
-				{
 					count += parser((char)flags.type, arg, flags);
-				}
 			else if (line[i])
-				count += ft_putchar(line[i]);
+				return (-1);
 		}
 		else if (line[i] != '%')
 			count += ft_putchar(line[i]);
@@ -47,13 +47,17 @@ int				ft_printf(const char *s, ...)
 	free((char *)line);
 	return (count);
 }
+
 /*
 #include <stdio.h>
 #include <limits.h>
 
 int main()
 {
-	int	*tab = malloc(sizeof(int) * 10);
+	ft_printf("%0*i\n", -7, -54);
+	return (0);
+	
+	 int	*tab = malloc(sizeof(int) * 10);
 	int	*tab2 = malloc(0);
 	
 	ft_printf("--------------------%%p--------------------\n");

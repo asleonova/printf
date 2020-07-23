@@ -7,11 +7,13 @@ int print_ptr_result(char *ptr, t_flags flags)
 
 	len = ft_strlen(ptr);
 	count = ft_putstr("0x", 2);
-	if (flags.precision >= 0 && flags.precision < len)
-		flags.precision = len;
 	if (flags.precision >= 0)
+	{
 		count += ft_width(flags.precision, len, 1);
-	count += ft_putstr(ptr, len);	
+		count += ft_putstr(ptr, flags.precision);
+	}
+	else
+		count += ft_putstr(ptr, len);	
 	return (count);
 
 }
@@ -56,7 +58,6 @@ char *put_ptr(unsigned long long nb)
 	}
 	hex_tmp[len] = '\0';
 	rev_hex = ft_strrev(hex_tmp);
-	// free(hex_tmp);
 	return (rev_hex);
 }
 
@@ -68,55 +69,14 @@ int		print_ptr(unsigned long long nb, t_flags flags)
 	count = 0;
 	if (flags.precision == 0 && nb == 0)
 	{
+		count += ft_width(flags.width, 2, 0);
 		count += ft_putstr("0x", 2);
-		count += ft_width(flags.width, 0, 1);
 		return (count);
 	}
+	if (nb == 0 && flags.precision >= 0)
+		flags.width -= 1;
 	ptr = put_ptr(nb);
 	count += ptr_check_flags(ptr, flags);
 	free (ptr);
 	return (count); 
 }
-
-/*
-int	 print_ptr_result(char *ptr, t_flags flags, int len)
-{
-	int		count;
-
-	count = 0;
-	count += ft_putstr("0x", 2);
-	if (flags.precision >= 0)
-	{
-		count += ft_width(flags.precision, len, 1);
-		count += ft_putstr(ptr, flags.precision);
-	}
-	else
-		count += ft_putstr(ptr, len);
-	return (count);
-}
-
-int			print_ptr(unsigned long long nb, t_flags flags)
-{
-	size_t	len;
-	char	*ptr;
-	int		count;
-
-	count = 0;
-	if (nb == 0 && flags.precision == 0)
-	{
-		count += ft_putstr("0x", 2);
-		return (count += ft_width(flags.width, 0, 1));
-	}
-	ptr = put_hex(nb);
-	len = ft_strlen(ptr);
-	if (flags.precision < len)
-		flags.precision = len;
-	if (flags.flag_minus == 1)
-		count += print_ptr_result(ptr, flags, len);
-	count += ft_width(flags.width, len + 2, 0);
-	if (flags.flag_minus == 0)
-		count += print_ptr_result(ptr, flags, len);
-	free(ptr);
-	return (count);
-}
-*/

@@ -75,8 +75,8 @@ int print_int_result(char *str_nb, int nb, t_flags flags)
 	count = 0;
 
 	len = ft_strlen(str_nb);
-	if (flags.precision >= 0 && flags.precision < ft_strlen(str_nb))
-		flags.precision = len;
+	 if (flags.precision >= 0 && flags.precision < ft_strlen(str_nb))
+		 flags.precision = len;
 	if (nb < 0 && flags.precision >= 0)
 			ft_putchar('-');
 	if (flags.precision >= 0)
