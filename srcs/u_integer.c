@@ -1,6 +1,4 @@
 #include "ft_printf.h"
-/** print_uint - prints unsigned integer, returns the amoubt of characters printed
- */
 
 int unum_len(unsigned int nb)
 {
@@ -18,8 +16,32 @@ int unum_len(unsigned int nb)
 	}
 	return (len);
 }
+/*char			*ft_itoa_uint(unsigned int nb)
+{
+	char	*str;
+	int		size;
 
-char *ft_itoa_uint(unsigned int nb)
+	size = unum_len(nb);
+	if (!(str = malloc(sizeof(char) * (size + 1))))
+		return (0);
+	str[size--] = '\0';
+	if (nb < 0)
+	{
+		str[0] = '-';
+		nb = nb * -1;
+	}
+	if (nb == 0)
+		str[0] = '0';
+	while (nb > 0)
+	{
+		str[size] = (nb % 10) + '0';
+		nb = nb / 10;
+		size--;
+	}
+	return (str);
+}
+*/
+char *ft_itoa_uint(unsigned long long nb)
 {
 	char *str;
     int len;
@@ -31,7 +53,7 @@ char *ft_itoa_uint(unsigned int nb)
 		return (NULL);
 	str[len] = 0;
 	if (nb == 0)
-		str[0] = '0';
+		return (ft_strdup("0"));
 	if (nb < 0)
 	{
 		str[0] = '-';
@@ -88,41 +110,18 @@ int		print_uint(unsigned int nb, t_flags flags)
 {
 	char *str_nb;
 	int count;
-	unsigned int tmp;
+	unsigned long long tmp;
 
 	count = 0;
-	tmp = nb;
+	tmp = (unsigned int)(4294967295 + 1 + nb);
 
 	if (flags.precision == 0 && nb == 0)
 	{
 		count += ft_width(flags.width, 0, 0);
 		return (count);
 	}
-	str_nb = ft_itoa_uint(nb);
+	str_nb = ft_itoa_uint(tmp);
 	count += uint_check_flags(str_nb, flags);
 	free (str_nb);
 	return (count); 
 }
-
-/*void	put_uint(unsigned int nb)
-{
-	if (nb > 9)
-	{
-		put_uint(nb / 10);
-		put_uint(nb % 10);
-	}
-	else
-		ft_putchar(nb + '0');
-}
-*/
-/*int		print_uint(va_list arg)
-{
-	unsigned int nb;
-
-	nb = va_arg(arg, unsigned int);
-	if (nb < 1) // это если юзер подаст отрицательное число после знака процента
- 	   return (-1);
-	put_uint(nb);
-	return(num_len(nb));
-}
-*/

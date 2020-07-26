@@ -15,15 +15,17 @@ HEADER = ft_printf.h
 INCLUDES = ./
 SRCS =	flags.c \
 		ft_printf.c \
-		help_fuctions.c \
+		help_functions.c \
+		identifier.c \
 		hex.c \
 		integer.c \
 		percent.c \
 		pointer.c \
 		string.c \
-		width.c \
 		char.c \
 		u_integer.c \
+		help_func_int.c \
+		help_func_hex.c \
 
 OBJS = $(SRCS:%.c=%.o)
 

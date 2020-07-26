@@ -1,23 +1,18 @@
 #include "ft_printf.h"
-/**
- ** print_string - prints a string, returns the amount of characters printed
- */
 
-/*int 	str_output (char *str, t_flags flags)
+int 	str_output(char *str, t_flags flags)
 {
 	int count;
-	int len;
-	len = ft_strlen(str);
-	if (flags.precision >= 0 && flags.precision > len)
-			flags.precision = len;
+
 	count = 0;
 	if (flags.flag_minus == 1)
-		count += ft_putstr(str, len);
-	count += ft_width(flags.width, len, 0);
+		count += ft_putstr(str, flags.precision);
+	count += ft_width(flags.width, flags.precision, 0);
 	if (flags.flag_minus == 0)
-		count += ft_putstr(str, len);
+		count += ft_putstr(str, flags.precision);
+	return (count);
 }
-*/
+
 int		print_str(char *str, t_flags flags)
 {
 	int count;
@@ -38,12 +33,6 @@ int		print_str(char *str, t_flags flags)
 			count += ft_putstr(str, len);
 	}
 	if (flags.precision >= 0)
-	{
-		if (flags.flag_minus == 1)
-			count += ft_putstr(str, flags.precision);
-		count += ft_width(flags.width, flags.precision, 0);
-		if (flags.flag_minus == 0)
-			count += ft_putstr(str, flags.precision);
-	}
+		count += str_output(str, flags);
 	return (count);
 }

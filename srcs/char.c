@@ -1,9 +1,5 @@
 #include "ft_printf.h"
 
-/**
- ** print_char - prints a character, returns the amount of characters printed
- * */
-
 int print_char(va_list arg, t_flags flags)
 {
     int count;
