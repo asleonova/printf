@@ -19,7 +19,7 @@ You can print strings with ``%s``, or characters with ``%c``. For decimal number
 
 It can manage any combination of the following flags:  ``-`` and ``0`` (``%-5s`` or ``%05s``), as well as the width and precision like: (``%5s``), (``%.5s``)
 
-Example :
+### Example :
 
 ```c
 
