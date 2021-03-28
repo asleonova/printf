@@ -17,11 +17,12 @@ The function is called with the standard printf usage options.
 
 You can print strings with ``%s``, or characters with ``%c``. For decimal numbers, use ``%d`` or ``%i``, or ``%u`` for unsigned. If you want another base, use ``%o`` for octal, ``%x`` for hexadecimal and ``%X`` for CAPS hexadecimal. Finally, ``%p`` displays a pointer address.
 
-Width (``%5s``) and precision (``%.5s``) options are available, as well as width-flags ``-`` and ``0`` (``%-5s`` or ``%05s``), and work the same as printf.
+It can manage any combination of the following flags:  ``-`` and ``0`` (``%-5s`` or ``%05s``), as well as the width and precision like: (``%5s``), (``%.5s``)
 
 Example :
 
 ```
+c
 ft_print("The number of %s is %d.", "people", 5);
 >> The number of people is 5.
 
