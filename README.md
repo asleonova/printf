@@ -21,11 +21,11 @@ It can manage any combination of the following flags:  ``-`` and ``0`` (``%-5s``
 
 Example :
 
-```
-c
+```c
+
 ft_print("The number of %s is %d.", "people", 5);
->> The number of people is 5.
+// The number of people is 5.
 
 ft_printf("%d is %x in hex and %o in octal.", 30, 30, 30);
->> 30 is 1e in hex and 36 in octal.
+// 30 is 1e in hex and 36 in octal.
 ```
